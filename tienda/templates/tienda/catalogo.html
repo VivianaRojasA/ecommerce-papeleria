@@ -1,0 +1,35 @@
+{% extends 'tienda/base.html' %} {% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="my-4 text-center">Catálogo de Productos</h2>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for producto in productos %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text text-muted">{{ producto.descripcion|truncatewords:15 }}</p>
+                <h4 class="text-primary">${{ producto.precio }}</h4>
+                <p class="small text-secondary">Stock disponible: {{ producto.stock }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                <div class="d-grid">
+                    <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-outline-dark">
+                        <i class="bi bi-cart-plus"></i> Agregar al carrito
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            No hay productos disponibles en este momento. Ingresa al <a href="{% url 'admin:index' %}">Panel de Administración</a> para agregar algunos.
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

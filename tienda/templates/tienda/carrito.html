@@ -1,0 +1,57 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h3>Tu Carrito de Compras</h3>
+        <table class="table align-middle mt-3">
+            <thead class="table-light">
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>${{ item.precio }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td><strong>${{ item.subtotal }}</strong></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">El carrito está vacío.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4>Resumen</h4>
+                <hr>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Total a pagar:</span>
+                    <span class="h4 text-primary">${{ total }}</span>
+                </div>
+                
+                {% if items %}
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'confirmar_compra' %}" class="btn btn-success btn-lg">
+                            <i class="bi bi-check-circle"></i> Confirmar Compra
+                        </a>
+                        <a href="{% url 'catalogo' %}" class="btn btn-outline-secondary">
+                            Seguir Comprando
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

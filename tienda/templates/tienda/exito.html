@@ -1,0 +1,10 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <div class="display-1 text-success"><i class="bi bi-bag-check-fill"></i></div>
+    <h2 class="mt-3">¡Muchas gracias por tu compra!</h2>
+    <p class="lead">Tu orden **#{{ orden.id }}** ha sido registrada con éxito.</p>
+    <a href="{% url 'catalogo' %}" class="btn btn-primary mt-4">Volver al inicio</a>
+</div>
+{% endblock %}
